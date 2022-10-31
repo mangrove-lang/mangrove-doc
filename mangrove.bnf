@@ -28,3 +28,17 @@ list = "[" [logicExpr ("," logicExpr)*] "]";
 
 keyValue = string ":" logicExpr;
 dict = "{" [keyValue ("," keyValue)*] "}";
+
+# ident here means something that is not a reserved word such as "function"
+ident = (alpha | "_") (alphaNum | "_")*;
+dottedIdent = ident ('.' ident)*;
+const = int | float | string | char | bool | null | list | dict;
+bracketExpr = ("(" logicExpr ")");
+slice = [logicExpr] ":" [logicExpr];
+index = "[" (slice | logicExpr) "]";
+value = (dottedIdent [index]) | const | functionCall | lambdaCall | bracketExpr;
+
+callArgs = "(" [value ("," value)*] ")";
+functionCall = dottedIdent callArgs;
+lambdaExpr = "function" params returnType block;
+lambdaCall = "(" lambdaExpr ")" callArgs;
