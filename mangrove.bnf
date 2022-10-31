@@ -116,3 +116,13 @@ returnType = [constSpec] [staticSpec] "->" returnTypeDecl;
 classDef = "class" ident extBlock;
 functionDef = "function" ident params returnType block;
 operatorDef = "operator" operator params returnType block;
+define = classDef | functionDef | operatorDef;
+
+decorator = "@" dottedIdent [callArgs];
+decoratedDef = decorator* define;
+
+statement = (importStmt | ifStmt | forStmt | whileStmt | doStmt | selectStmt |
+	expression | decoratedDef | unsafeBlock);
+
+braceBlock = "{" statement* "}";
+block = braceBlock | statement;
