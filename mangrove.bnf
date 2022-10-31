@@ -94,3 +94,12 @@ expression = (deleteExpr | assignExpr | returnExpr | logicExpr) [";"];
 
 importIdent = ident ["as" ident];
 importStmt = ["from" dottedIdent] "import" importIdent ("," importIdent)*;
+
+ifExpr = "if" logicExpr block;
+elifExpr = "elif" logicExpr block;
+elseExpr = "else" block;
+
+ifStmt = ifExpr elifExpr* [elseExpr];
+# Need to write for loops.
+whileStmt = "while" logicExpr block;
+doStmt = "do" block "while" logicExpr;
