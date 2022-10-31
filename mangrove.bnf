@@ -103,3 +103,12 @@ ifStmt = ifExpr elifExpr* [elseExpr];
 # Need to write for loops.
 whileStmt = "while" logicExpr block;
 doStmt = "do" block "while" logicExpr;
+
+type = "String" | "Char" | "Bool" | "Int8" | "Uint8" | "Int16" | "Uint16" |
+	"Int32" | "Uint32" | "Int64" | "Uint64" | "type" | "auto" | ident;
+
+# NB: param here is typeDecl minus locationSpec and should be parsed as such.
+param = storageSpec type [ident]
+pararms = "(" [param ("," param)*] ")";
+returnTypeDecl = ([cvSpec] type) | "none";
+returnType = [constSpec] [staticSpec] "->" returnTypeDecl;
