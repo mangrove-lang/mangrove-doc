@@ -1,0 +1,30 @@
+alpha = "a"..."z" | "A"..."Z" | U+00C0...U+2000 | U+2070...U+D7FF | U+E000...U+FE4F |
+	U+FE70...U+FEFF | U+10000...U+2FA1F;
+allNormalAlpha = " " | "!" | "#"..."&" | "("..."[" | "]"..."~" | U+0080...U+D7FF |
+	U+E000...U+0010FFFF;
+digit = "0"..."9";
+alphaNum = alpha | digit;
+hex = digit | "a"..."f" | "A"..."F";
+oct = "0"..."7";
+bin = "0" | "1";
+newLine = (U+000A | U+000D)+;
+# For technical reasons in the parser, we technically have to treat comments as "whitespace" except when they're not.
+whiteSpace = (" " | U+0009 | newLine | comment)+;
+unicodeSeq = "\" ("u" | "U") hex+;
+specialSeq = "\" ["\" | "b" | "r" | "n" | "t" | "v" | "f" | "a" ];
+unicode = allNormalAlpha | unicodeSeq | specialSeq;
+
+lineComment = ("#" | "//") (U+0000...U+0009 | U+000B...U+000C | U+000E...U+0010FFFF)* newLine;
+partComment = "/*" (U+0000...U+0010FFFF)* "*/";
+comment = lineComment | partComment;
+
+int = ("0" ("x"|"X") hex+) | ("0" ("b"|"B") bin+) | ("0" oct+) | digit+;
+float = digit+ "." digit* ["f" | "F"];
+string = ('"' (unicode | "'" | '\"')* '"')+;
+char = "'" (unicode | '"' | "\'") "'";
+bool = "true" | "false";
+null = "nullptr";
+list = "[" [logicExpr ("," logicExpr)*] "]";
+
+keyValue = string ":" logicExpr;
+dict = "{" [keyValue ("," keyValue)*] "}";
