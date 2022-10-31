@@ -72,3 +72,22 @@ boolInExpr = bitExpr ["not"] in value;
 memberExpr = boolIsExpr | boolInExpr;
 relation = relExpr | betweenExpr | memberExpr;
 logicExpr = relation (logicOp relation)*;
+
+locationSpec = "eeprom" | "flash" | "rom";
+# NB: Unlike decorator below which must not have any space between the `@` and dottedIdent
+# This requires whitespace between the `@` and integer
+addressSpec = "@" int;
+constSpec = "const";
+cvSpec = [constSpec] ["volatile"];
+staticSpec = "static";
+storageSpec = [staticSpec] [cvSpec];
+typeDecl = storageSpec [locationSpec] type;
+identDef = typeDecl ident [addressSpec];
+targetIdent = (identDef | dottedIdent);
+assignOpExpr = [dottedIdent assignOp] logicExpr;
+deleteExpr = "delete" dottedIdent;
+newExpr = "new" functionCall;
+valueExpr = newExpr | logicExpr;
+assignExpr = (targetIdent ["=" valueExpr]) | assignOpExpr;
+returnExpr = "return" valueExpr;
+expression = (deleteExpr | assignExpr | returnExpr | logicExpr) [";"];
