@@ -104,6 +104,8 @@ ifStmt = ifExpr elifExpr* [elseExpr];
 whileStmt = "while" logicExpr block;
 doStmt = "do" block "while" logicExpr;
 
+unsafeStmt = "unsafe" block;
+
 type = "String" | "Char" | "Bool" | "Int8" | "Uint8" | "Int16" | "Uint16" |
 	"Int32" | "Uint32" | "Int64" | "Uint64" | "type" | "auto" | ident;
 
@@ -122,7 +124,7 @@ decorator = "@" dottedIdent [callArgs];
 decoratedDef = decorator* define;
 
 statement = (importStmt | ifStmt | forStmt | whileStmt | doStmt | selectStmt |
-	expression | decoratedDef | unsafeBlock);
+	expression | decoratedDef | unsafeStmt);
 
 braceBlock = "{" statement* "}";
 block = braceBlock | statement;
