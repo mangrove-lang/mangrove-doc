@@ -112,3 +112,7 @@ param = storageSpec type [ident]
 pararms = "(" [param ("," param)*] ")";
 returnTypeDecl = ([cvSpec] type) | "none";
 returnType = [constSpec] [staticSpec] "->" returnTypeDecl;
+
+classDef = "class" ident extBlock;
+functionDef = "function" ident params returnType block;
+operatorDef = "operator" operator params returnType block;
