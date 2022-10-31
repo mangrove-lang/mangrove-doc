@@ -131,3 +131,9 @@ statement = (importStmt | ifStmt | forStmt | whileStmt | doStmt | selectStmt |
 
 braceBlock = "{" statement* "}";
 block = braceBlock | statement;
+
+extStatement = visibility | statement;
+extBraceBlock = "{" extStatement* "}";
+extBlock = extBraceBlock;
+
+sourceFile = extStatement+;
