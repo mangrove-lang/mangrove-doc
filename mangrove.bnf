@@ -91,3 +91,6 @@ valueExpr = newExpr | logicExpr;
 assignExpr = (targetIdent ["=" valueExpr]) | assignOpExpr;
 returnExpr = "return" valueExpr;
 expression = (deleteExpr | assignExpr | returnExpr | logicExpr) [";"];
+
+importIdent = ident ["as" ident];
+importStmt = ["from" dottedIdent] "import" importIdent ("," importIdent)*;
