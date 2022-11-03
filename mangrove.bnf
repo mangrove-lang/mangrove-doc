@@ -113,7 +113,7 @@ type = valueType | "auto" | "type";
 
 # NB: param here is typeDecl minus locationSpec and should be parsed as such.
 param = storageSpec type [ident]
-pararms = "(" [param ("," param)*] ")";
+params = "(" [param ("," param)*] ")";
 returnTypeDecl = ([cvSpec] type) | "none";
 returnType = [constSpec] [staticSpec] "->" returnTypeDecl;
 
