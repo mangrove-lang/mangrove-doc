@@ -126,10 +126,10 @@ tmplParam = tmplTypeParam | tmplValueParam;
 tmplDef = "<" [tmplParam ("," tmplParam)*] ">";
 
 classDef = "class" ident [tmplDef] extBlock;
+enumDef = "enum" ident [":" (intType | ident)] enumBlock;
 functionDef = "function" ident [tmplDef] params returnType block;
 operatorDef = "operator" operator params returnType block;
-enumDef = "enum" ident [":" (intType | ident)] enumBlock;
-define = classDef | functionDef | operatorDef;
+define = classDef | enumDef | functionDef | operatorDef;
 
 decorator = "@" dottedIdent [callArgs];
 decoratedDef = decorator* define;
