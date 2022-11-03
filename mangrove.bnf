@@ -108,8 +108,8 @@ unsafeStmt = "unsafe" block;
 
 intType = "Int8" | "UInt8" | "Int16" | "UInt16" | "Int32" | "UInt32" | "Int64" | "UInt64";
 builtinType = "String" | "Char" | "Bool" | "Byte" | intType | "Array" | "Dict" | "Set";
-valueType = builtinType | "auto" | ident;
-type = valueType | "type";
+valueType = builtinType | ident;
+type = valueType | "auto" | "type";
 
 # NB: param here is typeDecl minus locationSpec and should be parsed as such.
 param = storageSpec type [ident]
@@ -128,7 +128,7 @@ tmplDef = "<" [tmplParam ("," tmplParam)*] ">";
 classDef = "class" ident [tmplDef] extBlock;
 enumDef = "enum" ident [":" (intType | ident)] enumBlock;
 functionDef = "function" ident [tmplDef] params returnType block;
-operatorDef = "operator" operator params returnType block;
+operatorDef = "operator" (operator | valueType) params returnType block;
 define = classDef | enumDef | functionDef | operatorDef;
 
 decorator = "@" dottedIdent [callArgs];
