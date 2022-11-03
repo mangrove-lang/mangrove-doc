@@ -128,7 +128,7 @@ tmplDef = "<" [tmplParam ("," tmplParam)*] ">";
 classDef = "class" ident [tmplDef] extBlock;
 functionDef = "function" ident [tmplDef] params returnType block;
 operatorDef = "operator" operator params returnType block;
-enumDef = "enum" [":" (intType | ident)] enumBlock;
+enumDef = "enum" ident [":" (intType | ident)] enumBlock;
 define = classDef | functionDef | operatorDef;
 
 decorator = "@" dottedIdent [callArgs];
