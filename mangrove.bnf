@@ -106,8 +106,8 @@ doStmt = "do" block "while" logicExpr;
 
 unsafeStmt = "unsafe" block;
 
-builtinType = "String" | "Char" | "Bool" | "Int8" | "UInt8" | "Int16" | "UInt16" |
-	"Int32" | "UInt32" | "Int64" | "UInt64" | "Array" | "Dict" | "Set" | "Byte";
+intType = "Int8" | "UInt8" | "Int16" | "UInt16" | "Int32" | "UInt32" | "Int64" | "UInt64";
+builtinType = "String" | "Char" | "Bool" | "Byte" | intType | "Array" | "Dict" | "Set";
 valueType = builtinType | "auto" | ident;
 type = valueType | "type";
 
@@ -117,6 +117,9 @@ pararms = "(" [param ("," param)*] ")";
 returnTypeDecl = ([cvSpec] type) | "none";
 returnType = [constSpec] [staticSpec] "->" returnTypeDecl;
 
+enumMember = ident ["=" int]
+enumBlock = "{" enumMember ("," enumMember)* "}";
+
 tmplTypeParam = ["type"] ident ["=" typePattern];
 tmplValueParam = valueType ident ["=" logicExpr];
 tmplParam = tmplTypeParam | tmplValueParam;
@@ -125,6 +128,7 @@ tmplDef = "<" [tmplParam ("," tmplParam)*] ">";
 classDef = "class" ident [tmplDef] extBlock;
 functionDef = "function" ident [tmplDef] params returnType block;
 operatorDef = "operator" operator params returnType block;
+enumDef = "enum" [":" (intType | ident)] enumBlock;
 define = classDef | functionDef | operatorDef;
 
 decorator = "@" dottedIdent [callArgs];
