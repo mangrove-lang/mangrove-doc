@@ -100,7 +100,7 @@ elifExpr = "elif" logicExpr block;
 elseExpr = "else" block;
 
 ifStmt = ifExpr elifExpr* [elseExpr];
-# Need to write for loops.
+forStmt = "for" "(" [cvSpec] type ident ":" value ")" block;
 whileStmt = "while" logicExpr block;
 doStmt = "do" block "while" logicExpr;
 
