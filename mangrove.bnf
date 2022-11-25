@@ -107,7 +107,8 @@ doStmt = "do" block "while" logicExpr;
 unsafeStmt = "unsafe" block;
 
 intType = "Int8" | "UInt8" | "Int16" | "UInt16" | "Int32" | "UInt32" | "Int64" | "UInt64";
-builtinType = "String" | "Char" | "Bool" | "Byte" | intType | "Array" | "Dict" | "Set";
+floatType = "Float32" | "Float64";
+builtinType = "String" | "Char" | "Bool" | "Byte" | intType | floatType | "Array" | "Dict" | "Set";
 valueType = builtinType | ident;
 type = valueType | "auto" | "type";
 
