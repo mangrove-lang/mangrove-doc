@@ -100,7 +100,7 @@ elifExpr = "elif" logicExpr block;
 elseExpr = "else" block;
 
 ifStmt = ifExpr elifExpr* [elseExpr];
-forStmt = "for" "(" [cvSpec] type ident ":" value ")" block;
+forStmt = "for" "(" cvType ident ":" value ")" block;
 whileStmt = "while" logicExpr block;
 doStmt = "do" block "while" logicExpr;
 
@@ -111,11 +111,12 @@ floatType = "Float32" | "Float64";
 builtinType = "String" | "Char" | "Bool" | "Byte" | intType | floatType | "Array" | "Dict" | "Set";
 valueType = builtinType | ident;
 type = valueType | "auto" | "type";
+cvType = [cvSpec] type;
 
 # NB: param here is typeDecl minus locationSpec and should be parsed as such.
 param = storageSpec type [ident]
 params = "(" [param ("," param)*] ")";
-returnTypeDecl = ([cvSpec] type) | "none";
+returnTypeDecl = cvType | "none";
 returnType = [constSpec] [staticSpec] "->" returnTypeDecl;
 
 enumMember = ident ["=" int]
