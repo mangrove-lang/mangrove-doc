@@ -92,8 +92,10 @@ assignExpr = (targetIdent ["=" valueExpr]) | assignOpExpr;
 returnExpr = "return" valueExpr;
 expression = (deleteExpr | assignExpr | returnExpr | logicExpr) [";"];
 
+# The '.' preceeding a dotted identifier turn the import into a relative import.
+importTarget = ["."+] dottedIdent;
 importIdent = ident ["as" ident];
-importStmt = "from" dottedIdent "import" importIdent ("," importIdent)*;
+importStmt = "from" importTarget "import" importIdent ("," importIdent)*;
 
 ifExpr = "if" logicExpr block;
 elifExpr = "elif" logicExpr block;
