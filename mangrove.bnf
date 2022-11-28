@@ -93,14 +93,14 @@ returnExpr = "return" valueExpr;
 expression = (deleteExpr | assignExpr | returnExpr | logicExpr) [";"];
 
 importIdent = ident ["as" ident];
-importStmt = ["from" dottedIdent] "import" importIdent ("," importIdent)*;
+importStmt = "from" dottedIdent "import" importIdent ("," importIdent)*;
 
 ifExpr = "if" logicExpr block;
 elifExpr = "elif" logicExpr block;
 elseExpr = "else" block;
 
 ifStmt = ifExpr elifExpr* [elseExpr];
-forStmt = "for" "(" cvType ident ":" value ")" block;
+forStmt = "for" "(" cvType ident [refOrPtr] ":" value ")" block;
 whileStmt = "while" logicExpr block;
 doStmt = "do" block "while" logicExpr;
 
