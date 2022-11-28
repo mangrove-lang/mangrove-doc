@@ -110,7 +110,8 @@ intType = "Int8" | "UInt8" | "Int16" | "UInt16" | "Int32" | "UInt32" | "Int64" |
 floatType = "Float32" | "Float64";
 builtinType = "String" | "Char" | "Bool" | "Byte" | intType | floatType | "Array" | "Dict" | "Set";
 valueType = builtinType | ident;
-type = valueType | "auto" | "type";
+refOrPtr = "&" | "*";
+type = (valueType | "auto" | "type") [refOrPtr];
 cvType = [cvSpec] type;
 
 # NB: param here is typeDecl minus locationSpec and should be parsed as such.
