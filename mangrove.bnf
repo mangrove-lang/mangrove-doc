@@ -36,7 +36,8 @@ const = int | float | string | char | bool | null | list | dict;
 bracketExpr = ("(" logicExpr ")");
 slice = [logicExpr] ":" [logicExpr];
 index = "[" (slice | logicExpr) "]";
-value = (dottedIdent [index]) | const | functionCall | lambdaCall | bracketExpr;
+pack = ident "...";
+value = (dottedIdent [index]) | pack | const | functionCall | lambdaCall | bracketExpr;
 
 callArgs = "(" [value ("," value)*] ")";
 functionCall = dottedIdent callArgs;
@@ -116,8 +117,8 @@ refOrPtr = "&" | "*";
 type = (valueType | "auto" | "type") [refOrPtr];
 cvType = [cvSpec] type;
 
-# NB: param here is typeDecl minus locationSpec and should be parsed as such.
-param = storageSpec type [ident]
+# NB: the type part of param here is typeDecl minus locationSpec and should be parsed as such.
+param = storageSpec type [ident ["..."]]
 params = "(" [param ("," param)*] ")";
 returnTypeDecl = cvType | "none";
 returnType = [constSpec] [staticSpec] "->" returnTypeDecl;
@@ -125,8 +126,8 @@ returnType = [constSpec] [staticSpec] "->" returnTypeDecl;
 enumMember = ident ["=" int]
 enumBlock = "{" enumMember ("," enumMember)* "}";
 
-tmplTypeParam = ["type"] ident ["=" typePattern];
-tmplValueParam = valueType ident ["=" logicExpr];
+tmplTypeParam = "type" ["..."] ident ["=" typeOrPattern];
+tmplValueParam = valueType [refOrPtr] ["..."] ident ["=" logicExpr];
 tmplParam = tmplTypeParam | tmplValueParam;
 tmplDef = "<" [tmplParam ("," tmplParam)*] ">";
 
