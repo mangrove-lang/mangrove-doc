@@ -39,7 +39,8 @@ index = "[" (slice | logicExpr) "]";
 pack = ident "...";
 value = (dottedIdent [index]) | pack | const | functionCall | lambdaCall | bracketExpr;
 
-callArgs = "(" [value ("," value)*] ")";
+templateArgs = "<" value, (",", value)* ">";
+callArgs = [templateArgs] "(" [value ("," value)*] ")";
 functionCall = dottedIdent callArgs;
 lambdaExpr = "function" params returnType block;
 lambdaCall = "(" lambdaExpr ")" callArgs;
