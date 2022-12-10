@@ -18,7 +18,7 @@ lineComment = ("#" | "//") (U+0000...U+0009 | U+000B...U+000C | U+000E...U+0010F
 partComment = "/*" (U+0000...U+0010FFFF)* "*/";
 comment = lineComment | partComment;
 
-int = ("0" ("x"|"X") hex+) | ("0" ("b"|"B") bin+) | ("0" oct+) | digit+;
+int = ("0" ("x" | "X") hex+) | ("0" ("b" | "B") bin+) | ("0" ("c" | "C") oct+) | digit+;
 float = digit+ "." digit* ["f" | "F"];
 string = ('"' (unicode | "'" | '\"')* '"')+;
 char = "'" (unicode | '"' | "\'") "'";
