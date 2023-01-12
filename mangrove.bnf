@@ -89,7 +89,7 @@ targetIdent = (identDef | dottedIdent);
 assignOpExpr = [dottedIdent assignOp] logicExpr;
 deleteExpr = "delete" dottedIdent;
 newExpr = "new" functionCall;
-valueExpr = newExpr | logicExpr;
+valueExpr = newExpr | logicExpr | type;
 assignExpr = (targetIdent ["=" valueExpr]) | assignOpExpr;
 returnExpr = "return" valueExpr;
 expression = (deleteExpr | assignExpr | returnExpr | logicExpr) [";"];
